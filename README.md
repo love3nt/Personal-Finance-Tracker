@@ -12,6 +12,7 @@ A simple and efficient **Python-based personal finance tracker** that lets you l
 - **Date Range Summary**: See totals for income, expenses, and net balance for any selected period.
 - **CSV Storage**: All data is safely stored in a `.csv` file for easy access and backup.
 - **Simple CLI Interface**: User-friendly prompts and commands.
+- **Visualize Your Data**: Using matplotlib, you will be able to graph your expenses straight from the CLI.
 
 ---
 
@@ -19,7 +20,7 @@ A simple and efficient **Python-based personal finance tracker** that lets you l
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/personal-finance-tracker.git
+    git clone https://github.com/love3nt/Personal-Finance-Tracker.git
     cd personal-finance-tracker
     ```
 
