@@ -5,6 +5,7 @@ import pandas as pd
 import csv
 import os
 import time
+import matplotlib.pyplot as plt
 from datetime import datetime
 from data_entry import get_date, get_amount, get_category, get_description
 
@@ -74,6 +75,7 @@ class CSV:
             print(f"Total Income: ${total_income:.2f}")
             print(f"Total Expense: ${total_expense:.2f}")
             print(f"Net Balance: ${(total_income - total_expense):.2f}")
+        return filtered_df
 
 
 # Main function to add a new entry        
@@ -84,6 +86,38 @@ def add():
     category = get_category()
     description = get_description()
     CSV.add_entry(date, amount, category, description)
+
+# Function to plot transactions
+def plot_transactions(df):
+    df["Date"] = pd.to_datetime(df["Date"], format=CSV.FORMAT)
+    df.set_index("Date", inplace=True)
+
+    full_range = pd.date_range(df.index.min(), df.index.max(), freq='D')
+
+    income_df = (
+        df[df["Category"] == "Income"]["Amount"]
+        .resample("D")
+        .sum()
+        .reindex(full_range, fill_value=0)
+    )
+    expense_df = (
+        df[df["Category"] == "Expense"]["Amount"]
+        .resample("D")
+        .sum()
+        .reindex(full_range, fill_value=0)
+    )
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(full_range, income_df, label="Income", color="g")
+    plt.plot(full_range, expense_df, label="Expense", color="r")
+    plt.xlabel("Date")
+    plt.ylabel("Amount")
+    plt.title("Income and Expenses Over Time")
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+
     
 # Main menu function to navigate through the program
 def main_menu():
@@ -91,7 +125,7 @@ def main_menu():
     print("Initializing Personal Finance Tracker...")
     time.sleep(2)
     os.system('cls')
-    
+
     first_time = True
     while True:
         os.system('cls')
@@ -111,7 +145,9 @@ def main_menu():
         elif choice == '2':
             start_date = input("Enter start date (dd-mm-yyyy): ")
             end_date = input("Enter end date (dd-mm-yyyy): ")
-            CSV.view_entries(start_date, end_date)
+            df = CSV.view_entries(start_date, end_date)
+            if not df.empty and input("Do you want to see a plot (Y/N): ").upper() == "Y":
+                plot_transactions(df)
         elif choice == '3':
             print("Exiting the program.")
             break
