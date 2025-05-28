@@ -56,7 +56,7 @@ A simple and efficient **Python-based personal finance tracker** that lets you l
 ## 📁 Data Format
 
 Transactions are stored in a CSV file, e.g. `transactions.csv`, with the following columns:
-- **Date** (YYYY-MM-DD)
+- **Date** (DD-MM-YYYY)
 - **Amount**
 - **Category** (Income/Expense)
 - **Description** (optional)
@@ -64,14 +64,14 @@ Transactions are stored in a CSV file, e.g. `transactions.csv`, with the followi
 
 Example row:
 ```
-2025-05-27,1100.0,Income,Salary
-2025-05-28,250.0,Income,Freelance Work
-2025-05-29, 1000.0,Expense,Bills
+27-05-2025,1100.0,Income,Salary
+28-05-2025,250.0,Income,Freelance Work
+29-05-2025, 1000.0,Expense,Bills
 ```
 
 ---
 
-## 📝 Planned Features
+## 📝 Planned Features (maybe)
 
 - Category-based analytics
 - Export to Excel or PDF
