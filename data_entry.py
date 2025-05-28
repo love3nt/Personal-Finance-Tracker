@@ -36,7 +36,7 @@ def get_amount():
 
 # Get user input for category.
 def get_category():
-    category = input("Enter the category: \n 'I' Income\n 'E' Expense\n")
+    category = input("Enter the category ('I' Income or 'E' Expense):")
     category = category.upper()
 
     if category in CATEGORIES:
