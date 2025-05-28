@@ -3,6 +3,8 @@
 # Import necessary modules
 import pandas as pd
 import csv
+import os
+import time
 from datetime import datetime
 from data_entry import get_date, get_amount, get_category, get_description
 
@@ -37,8 +39,13 @@ class CSV:
             writer = csv.DictWriter(csvfile, fieldnames=cls.COLUMN_NAMES)
             # If the file is empty, write the header
             writer.writerow(new_entry)
+       
+        os.system('cls')
         print(f"Entry added successfully: {new_entry}")
-
+        time.sleep(3)
+        
+     
+# Method to view entries within a specified date range
     @classmethod
     def view_entries(cls, start_date, end_date):
         df =pd.read_csv(cls.CSV_FILE)
@@ -69,12 +76,50 @@ class CSV:
             print(f"Net Balance: ${(total_income - total_expense):.2f}")
 
 
-          
+# Main function to add a new entry        
 def add():
     CSV.initialize_csv()
-    date = get_date("Enter the date (dd-mm-yyyy) or press Enter for today's date: ", allow_default=True)
+    date = get_date("\n\nEnter the date (dd-mm-yyyy) or press Enter for today's date: ", allow_default=True)
     amount = get_amount()
     category = get_category()
     description = get_description()
     CSV.add_entry(date, amount, category, description)
+    
+# Main menu function to navigate through the program
+def main_menu():
+    os.system('cls')
+    print("Initializing Personal Finance Tracker...")
+    time.sleep(2)
+    os.system('cls')
+    
+    first_time = True
+    while True:
+        os.system('cls')
+        if first_time:
+            print("Welcome to your Personal Finance Tracker!")
+            print("This program will help you track your income and expenses.\n")
+            first_time = False
+        print("Main Menu:\n----------------------")
+        print("1. Add Entry")
+        print("2. View Transactions & summary within a date range") 
+        print("3. Exit\n")
+        
+        choice = input("Choose an option (1-3): ")
+        
+        if choice == '1':
+            add()
+        elif choice == '2':
+            start_date = input("Enter start date (dd-mm-yyyy): ")
+            end_date = input("Enter end date (dd-mm-yyyy): ")
+            CSV.view_entries(start_date, end_date)
+        elif choice == '3':
+            print("Exiting the program.")
+            break
+        else:
+            os.system('cls')
+            print("Invalid choice. Please try again. Making sure to enter a number between 1 and 3.")
+            time.sleep(3)
 
+
+if __name__ == "__main__":
+    main_menu()
