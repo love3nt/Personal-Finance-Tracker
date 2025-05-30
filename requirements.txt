@@ -1,2 +1,4 @@
+# These are the required libraries you will need installed on your machine in order to run the code.
+
 pandas
 matplotlib

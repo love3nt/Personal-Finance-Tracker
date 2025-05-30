@@ -1,4 +1,4 @@
-![status](https://img.shields.io/badge/status-WIP-yellow)
+![status](https://img.shields.io/badge/status-completed-brightgreen)
 
 
 # Personal Finance Tracker

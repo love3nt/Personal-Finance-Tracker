@@ -156,6 +156,6 @@ def main_menu():
             print("Invalid choice. Please try again. Making sure to enter a number between 1 and 3.")
             time.sleep(3)
 
-
+# Main program loop
 if __name__ == "__main__":
     main_menu()
